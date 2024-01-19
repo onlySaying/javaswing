@@ -1,0 +1,116 @@
+package dd;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class pp extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					pp frame = new pp();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public pp() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("\uC2E0\uC18D");
+		chckbxNewCheckBox.setBounds(40, 38, 63, 23);
+		contentPane.add(chckbxNewCheckBox);
+		
+		ButtonGroup size = new ButtonGroup();
+		JPanel panel = new JPanel();
+		panel.setBounds(144, 38, 243, 57);
+		contentPane.add(panel);
+		panel.setBorder(new TitledBorder("size"));
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("\uADF8\uB300\uB85C");
+		panel.add(rdbtnNewRadioButton_1);
+		size.add(rdbtnNewRadioButton_1);
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("1/2\uBC30");
+		panel.add(rdbtnNewRadioButton);
+		size.add(rdbtnNewRadioButton);
+		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("2\uBC30");
+		panel.add(rdbtnNewRadioButton_2);
+		size.add(rdbtnNewRadioButton_2);
+		
+		JLabel label = new JLabel("\uB9E4\uC218");
+		label.setBounds(68, 142, 35, 15);
+		contentPane.add(label);
+		
+		
+		JLabel saw_text = new JLabel("");
+		saw_text.setBounds(40, 224, 203, 15);
+		contentPane.add(saw_text);
+		
+		textField = new JTextField();
+		textField.setBounds(144, 139, 243, 21);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			String num = textField.getText();
+			int sum = 0;
+			sum = Integer.parseInt(num)*100;
+			
+			if(rdbtnNewRadioButton_1.isSelected() == true)
+			{
+			}
+			else if(rdbtnNewRadioButton.isSelected() == true)
+			{
+			sum += Integer.parseInt(num)*1000;
+			}
+			else if(rdbtnNewRadioButton_2.isSelected() ==true)
+			{
+				sum += Integer.parseInt(num)*2000;
+			}
+			
+			if(chckbxNewCheckBox.isSelected() == true)
+			{
+				sum *= 1.1;
+			}
+			String act = Integer.toString(sum);
+			saw_text.setText("รัพื : " + act);
+			
+			
+			}
+		});
+		btnNewButton.setBounds(68, 170, 319, 44);
+		contentPane.add(btnNewButton);
+	
+	}
+}

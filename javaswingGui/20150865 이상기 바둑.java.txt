@@ -1,0 +1,103 @@
+package dd;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class panel extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					panel frame = new panel();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public panel() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 28, 434, 233);
+		contentPane.add(panel);
+		
+		JButton button = new JButton("\uCD9C\uB825");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					BufferedImage img = ImageIO.read(new File("C:\\Users\\skLEE\\Desktop\\image\\tree.jpg"));
+					Graphics graphics = panel.getGraphics();
+					int dx1 = 0; int dy1 = 0; 
+					int dx2 = panel.getWidth(); int dy2 = panel.getHeight();
+					int sx1 = 0; int sy1 =0; 
+					int sx2 = img.getWidth(); int sy2 =img.getHeight();
+					graphics.drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, null); 
+					int x = dx2/18;
+					int y = dy2/18;
+					graphics.setColor(Color.black);
+					for(int i = 1 ; i <= 19 ; i++)
+					{
+						graphics.drawLine(x*i, 0, x*i,dy2);
+						graphics.drawLine(0, y*i, dx2,y*i);
+					}
+					graphics.fillOval(x*3, y*3, 5, 5);
+					graphics.fillOval(x*3, y*9, 5, 5);
+					graphics.fillOval(x*3, y*15, 5, 5);
+					
+					graphics.fillOval(x*9, y*3, 5, 5);
+					graphics.fillOval(x*9, y*9, 5, 5);
+					graphics.fillOval(x*9, y*15, 5, 5);
+					
+					graphics.fillOval(x*15, y*3, 5, 5);
+					graphics.fillOval(x*15, y*9, 5, 5);
+					graphics.fillOval(x*15, y*15, 5, 5);
+								
+					
+				
+				
+				
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+			}
+		});
+		button.setBounds(151, 0, 97, 23);
+		contentPane.add(button);
+		
+		
+		
+		
+	}
+}

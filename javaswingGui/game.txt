@@ -1,0 +1,195 @@
+package dd;
+import java.awt.EventQueue;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class game extends JFrame implements ActionListener
+{
+	private JLabel lblRed;
+	private JLabel lblBlue;
+	private JPanel contentPane;
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run()
+			{
+				try 
+				{
+					game frame = new game();
+					frame.setVisible(true);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	public game()
+	{
+		Timer timer = new Timer(1000, this);
+		timer.start();
+		
+		addKeyListener(new KeyAdapter()
+		{
+			@Override
+			public void keyPressed(KeyEvent e)
+			{
+				Point pb = lblBlue.getLocation();
+				int k = e.getKeyCode();
+				
+				switch(k)
+				{
+				case KeyEvent.VK_LEFT :
+					if(pb.x - 20 <= 0)
+					{
+						break;
+					}
+					else
+					{
+						pb.x = pb.x - 20;
+						break;
+					}
+				case KeyEvent.VK_RIGHT :
+					if(pb.x + 20 >= 420)
+					{
+						break;
+					}
+					else
+					{
+						pb.x = pb.x + 20;
+						break;
+					}
+				case KeyEvent.VK_UP :
+					if(pb.y - 20 <= 0)
+					{
+						break;
+					}
+					else
+					{
+						pb.y = pb.y - 20;
+						break;
+					}
+				case KeyEvent.VK_DOWN :
+					if(pb.y + 20 >= 240)
+					{
+						break;
+					}
+					else
+					{
+						pb.y = pb.y + 20;
+						break;
+					}
+				}
+				lblBlue.setLocation(pb);
+				
+				if(isCatched())
+				{
+					JOptionPane.showMessageDialog(null, "GAME CLEAR!", "", JOptionPane.INFORMATION_MESSAGE);
+					timer.stop();
+				}
+			}
+		});
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+	
+		lblRed = new JLabel("");
+		lblRed.setForeground(new Color(255, 0, 0));
+		lblRed.setBounds(22, 21, 20, 22);
+		contentPane.add(lblRed);
+		lblRed.setOpaque(true);
+		lblRed.setBackground(Color.RED);
+		
+		lblBlue = new JLabel("");
+		lblBlue.setBounds(388, 217, 20, 22);
+		contentPane.add(lblBlue);
+		lblBlue.setOpaque(true);
+		lblBlue.setBackground(Color.BLUE);	
+	}
+	public boolean isCatched()
+	{
+		Rectangle r1 = new Rectangle(lblRed.getLocation(), lblRed.getSize());
+		Rectangle r2 = new Rectangle(lblBlue.getLocation(), lblBlue.getSize());
+		
+		if(r1.intersects(r2))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		Random r = new Random();
+		int i = r.nextInt(4);
+		Point pr = lblRed.getLocation();
+		
+		switch(i)
+		{
+		case 0 :
+			if(pr.x - 10 <= 0)
+			{
+				break;
+			}
+			else
+			{
+				pr.x = pr.x - 10;
+				break;
+			}
+		case 1 :
+			if(pr.x + 10 >= 420)
+			{
+				break;
+			}
+			else
+			{
+				pr.x = pr.x + 10;
+				break;
+			}
+		case 2 :
+			if(pr.y - 10 <= 35)
+			{
+				break;
+			}
+			else
+			{
+				pr.y = pr.y - 10;
+				break;
+			}
+		case 3 :
+			if(pr.y + 10 >= 240)
+			{
+				break;
+			}
+			else
+			{
+				pr.y = pr.y + 10;
+				break;
+			}
+		}
+		lblRed.setLocation(pr);
+	}
+}

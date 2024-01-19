@@ -1,0 +1,111 @@
+package dd;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class login extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField id;
+	private JTextField password;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					login frame = new login();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public login() {
+		String identity[] = new String[10];
+		String PW[] = new String[10];
+		identity[0] = "1234";
+		PW[0] = "1234";
+		for(int i =1; i< 10; i++)
+		{
+			identity[i] = "생각안함";
+			PW[i] = "ㄹㅇ루";
+		}
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("login");
+		lblNewLabel.setBounds(43, 55, 73, 22);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("password");
+		lblNewLabel_1.setBounds(43, 130, 57, 15);
+		contentPane.add(lblNewLabel_1);
+		
+		id = new JTextField();
+		id.setBounds(128, 56, 161, 21);
+		contentPane.add(id);
+		id.setColumns(10);
+		
+		password = new JTextField();
+		password.setText("");
+		password.setBounds(128, 127, 161, 21);
+		contentPane.add(password);
+		password.setColumns(10);
+		
+		JButton cofirmlogin = new JButton("ok");
+		cofirmlogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String Id = id.getText();
+				String pw = password.getText();
+				for(int i = 0; i < identity.length; i++)
+				{
+					if(identity[i].matches(Id)) 
+					{
+						if(PW[i].matches(pw))
+						{
+							pp sf = new pp();
+							sf.setVisible(true);
+							break;
+						}
+					}
+				}
+				
+			}
+		});
+		cofirmlogin.setBounds(325, 55, 73, 23);
+		contentPane.add(cofirmlogin);
+		
+		JButton clear = new JButton("cancel");
+		clear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				id.setText("");
+				password.setText("");
+				
+			}
+		});
+		clear.setBounds(325, 126, 97, 23);
+		contentPane.add(clear);
+	}
+
+}
